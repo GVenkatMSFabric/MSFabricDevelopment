@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "TetsMain"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1c96dc9b-4a80-464e-9fbc-e309c28421ce"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "TempFileDataLoad"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "73f960cd-3866-4b62-bdc1-4a0ad80f5198"
+  }
+}
