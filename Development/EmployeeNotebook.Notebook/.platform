@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Notebook",
-    "displayName": "MainData",
-    "description": "New notebook"
+    "displayName": "EmployeeNotebook",
+    "description": "This is Demo Notebook Purpose."
   },
   "config": {
     "version": "2.0",
-    "logicalId": "613b124e-f351-4a22-88ed-b987d6b21a7f"
+    "logicalId": "043d608f-2ba3-46e8-8ae7-2c8e6d0d4341"
   }
 }

@@ -15,26 +15,9 @@
 # META   }
 # META }
 
-# CELL ********************
+# PARAMETERS CELL ********************
 
-!pip install semantic-link --q 
-import json
-import sempy.fabric as fabric
-from sempy.fabric.exceptions import FabricHTTPException, WorkspaceNotFoundException
-
-workspace_id=spark.conf.get("trident.workspace.id")
-
-#Instantiate the client
-client = fabric.FabricRestClient()
-uri = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/notebooks"
-
-# Call the REST API
-response = client.get(uri)
-display(response)
-
-data = json.loads(response.text)
-display(data)
-
+EmpId = ""
 
 # METADATA ********************
 
@@ -45,7 +28,8 @@ display(data)
 
 # CELL ********************
 
-notebookutils.notebook.exit(data)
+EmpId == EmpId
+print(EmpId)
 
 # METADATA ********************
 

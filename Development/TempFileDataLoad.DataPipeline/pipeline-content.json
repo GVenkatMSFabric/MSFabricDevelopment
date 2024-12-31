@@ -2,21 +2,53 @@
   "properties": {
     "activities": [
       {
-        "type": "TridentNotebook",
-        "typeProperties": {
-          "notebookId": "ab636ca8-a567-4a81-aaca-e3b501dcd082",
-          "workspaceId": "00000000-0000-0000-0000-000000000000"
-        },
+        "name": "StoreData",
+        "type": "SetVariable",
+        "dependsOn": [],
         "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
+          "secureOutput": false,
+          "secureInput": false
         },
-        "name": "Get Output Data",
-        "dependsOn": []
+        "typeProperties": {
+          "variableName": "Finalresult",
+          "value": {
+            "value": "{\n\t\"name\": \"FinalValue\",\n\t\"value\": \"{'value': [{'id': '8ecac692-cc6d-4561-a09f-7dfe06ebdfe9', 'type': 'Notebook', 'displayName': 'Notebook 1', 'description': 'New notebook', 'workspaceId': '636a293c-b141-4586-887c-b60d7f65acb8'}, {'id': '3db339e2-f224-460d-a8ed-c1d691f6ee34', 'type': 'Notebook', 'displayName': 'TempNotebookData', 'description': 'New notebook', 'workspaceId': '636a293c-b141-4586-887c-b60d7f65acb8'}, {'id': '3f3277dd-b57b-442b-b27c-16a5edb1d151', 'type': 'Notebook', 'displayName': 'Notebook 2', 'description': 'New notebook', 'workspaceId': '636a293c-b141-4586-887c-b60d7f65acb8'}, {'id': '29f6a388-c7fa-46bd-910c-a15233026de7', 'type': 'Notebook', 'displayName': 'Notebook 3', 'description': 'New notebook', 'workspaceId': '636a293c-b141-4586-887c-b60d7f65acb8'}]}\"\n}",
+            "type": "Expression"
+          }
+        }
+      },
+      {
+        "name": "Set variable1",
+        "type": "SetVariable",
+        "dependsOn": [
+          {
+            "activity": "StoreData",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "variableName": "DDD",
+          "value": {
+            "value": "@substring(variables('Finalresult'),72,200)",
+            "type": "Expression"
+          }
+        }
       }
-    ]
+    ],
+    "variables": {
+      "Finalresult": {
+        "type": "String",
+        "defaultValue": "{ 'EmpId' : \"TestData\" }"
+      },
+      "DDD": {
+        "type": "String"
+      }
+    }
   }
 }

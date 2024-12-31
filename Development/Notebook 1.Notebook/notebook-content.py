@@ -6,29 +6,134 @@
 # META   "kernel_info": {
 # META     "name": "synapse_pyspark"
 # META   },
-# META   "dependencies": {}
+# META   "dependencies": {
+# META     "lakehouse": {
+# META       "default_lakehouse": "5b9f77a2-8b6d-4400-a5a7-1f9f8bcdac66",
+# META       "default_lakehouse_name": "TempLakehouse",
+# META       "default_lakehouse_workspace_id": "636a293c-b141-4586-887c-b60d7f65acb8"
+# META     }
+# META   }
 # META }
 
 # CELL ********************
 
-  DataValue = [(101, 'Venkat', 'Male', 343, 'HR Dept'),
-            (102, 'Suresh', 'Female', 234, 'HR Dept'),
-            (103, 'Pavani', 'Female', 7900, 'IT Dept'),
-            (104, 'Rajesh', 'Male', 8767, 'Marketing Dept'),
-            (105, 'Rithvik', 'Female', 4545, 'Finance Dept'),
-            (106, 'Sravani', 'Male', 3434, 'Sales Dept'),
-            (107, 'Bala', 'Male', 34, 'HR Dept'),
-            (108, 'Subbu', 'Female', 3434, 'IT Dept'),
-            (109, 'Malli', 'Female', 6767, 'Marketing Dept'),
-            (110, 'Ravi', 'Female', 4343, 'Finance Dept'),
-            (111, 'Anitha', 'Male', 4545, 'Sales Dept'),
-            (112, 'Praveen', 'Male', 3334, 'HR Dept'),
-            (113, 'Rao', 'Female', 2333, 'IT Dept'),
-            (114, 'Hero', 'Female', 343,'Marketing Dept'),
-            (115, 'Super', 'Male', 343, 'Finance Dept')]
-SchemaValue = ["EmpId","EmpName","EmpGender","EmpSalary","EmpDept"]
-df = spark.createDataFrame(data=DataValue,schema=SchemaValue)
+# Retrieve the workspace ID
+workspace_id = spark.conf.get("trident.workspace.id")
+
+Name = spark.conf.get('trident.workspace.name')
+print(Name)
+print(f"The current workspace ID is: {workspace_id}")
+
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+c
+
+workspace_id=spark.conf.get("trident.workspace.id")
+print(workspace_id)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+!pip install semantic-link --q 
+import json
+import sempy.fabric as fabric
+from sempy.fabric.exceptions import FabricHTTPException, WorkspaceNotFoundException
+import pandas as pd
+import json
+
+workspace_id=spark.conf.get("trident.workspace.id")
+
+#Instantiate the client
+client = fabric.FabricRestClient()
+uri = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/notebooks"
+
+# Call the REST API
+response = client.get(uri)
+
+data = json.loads(response.text)
+df = pd.DataFrame(data["value"])
+df.write.format('delta').mode('overwrite').saveAsTable('EmpAPIInformation')
 display(df)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+!pip install semantic-link --q 
+import json
+import sempy.fabric as fabric
+from sempy.fabric.exceptions import FabricHTTPException, WorkspaceNotFoundException
+import pandas as pd
+import json
+
+workspace_id=spark.conf.get("trident.workspace.id")
+
+#Instantiate the client
+client = fabric.FabricRestClient()
+uri = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/notebooks"
+
+# Call the REST API
+response = client.get(uri)
+
+data = json.loads(response.text)
+df = spark.createDataFrame(data["value"])
+df.write.format('delta').mode('overwrite').saveAsTable('EmpAPIInformation')
+display(df)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC SELECT * FROM EmpAPIInformation
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+import sempy.fabric as fabric
+
+# Get the id of this notebooks workspace
+workspace_id = fabric.get_notebook_workspace_id()  
+# You can also get this with fabric.get_workspace_id()
+
+# From all workspaces, filter by Id and then just get the Name
+workspaces = fabric.list_workspaces()
+workspace_row = workspaces[workspaces.Id == workspace_id]
+
+workspace_name = workspace_row['Name']
+print(workspace_name)
+print(workspace_id)
 
 # METADATA ********************
 

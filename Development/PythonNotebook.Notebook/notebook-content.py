@@ -4,7 +4,8 @@
 
 # META {
 # META   "kernel_info": {
-# META     "name": "synapse_pyspark"
+# META     "name": "jupyter",
+# META     "jupyter_kernel_name": "python3.11"
 # META   },
 # META   "dependencies": {
 # META     "lakehouse": {
@@ -21,8 +22,10 @@
 import json
 import sempy.fabric as fabric
 from sempy.fabric.exceptions import FabricHTTPException, WorkspaceNotFoundException
+import pandas as pd
+import json
 
-workspace_id=spark.conf.get("trident.workspace.id")
+workspace_id='636a293c-b141-4586-887c-b60d7f65acb8'
 
 #Instantiate the client
 client = fabric.FabricRestClient()
@@ -30,26 +33,14 @@ uri = f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/notebooks"
 
 # Call the REST API
 response = client.get(uri)
-display(response)
 
 data = json.loads(response.text)
-display(data)
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-notebookutils.notebook.exit(data)
+df = pd.DataFrame(data["value"])
+display(df)
 
 # METADATA ********************
 
 # META {
 # META   "language": "python",
-# META   "language_group": "synapse_pyspark"
+# META   "language_group": "jupyter_python"
 # META }

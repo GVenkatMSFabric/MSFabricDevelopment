@@ -33,8 +33,7 @@ response = client.get(uri)
 display(response)
 
 data = json.loads(response.text)
-display(data)
-
+display(data) 
 
 # METADATA ********************
 
