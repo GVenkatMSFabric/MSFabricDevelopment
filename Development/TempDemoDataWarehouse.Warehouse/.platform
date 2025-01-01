@@ -2,7 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Warehouse",
-    "displayName": "TempDemoDataWarehouse"
+    "displayName": "Temp_FabricDW",
+    "description": "This is Updated the Fabric Data Warehouse Name"
   },
   "config": {
     "version": "2.0",

@@ -65,6 +65,20 @@ mssparkutils.fs.mounts()
 
 # CELL ********************
 
+notebookutils.fs.mount( 
+ "abfss://SalesReport@onelake.dfs.fabric.microsoft.com/TestLkHouse.Lakehouse", 
+ "/lakehouse/MainLakeHouse"
+)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 #To get the default lakehouse attached to the notebook
 
 for mp in mssparkutils.fs.mounts():
@@ -82,7 +96,12 @@ for mp in mssparkutils.fs.mounts():
 
 # CELL ********************
 
-storage_options = {"bearer_token": notebookutils.credentials.getToken("storage"), "use_fabric_endpoint": "true"}
+import pandas as pd 
+from glob import glob
+stock_files = sorted(glob('/lakehouse/default/Files/SourceFilesInfo/FinalCSVData/Dept.csv'))
+df = pd.concat((pd.read_csv(file).assign(filenme = file)
+      for file in stock_files), ignore_index=True)
+display(df)
 
 # METADATA ********************
 
@@ -93,8 +112,25 @@ storage_options = {"bearer_token": notebookutils.credentials.getToken("storage")
 
 # CELL ********************
 
-mssparkutils.fs.mount("abfss://636a293c-b141-4586-887c-b60d7f65acb8@onelake.dfs.fabric.microsoft.com/<lakehouse_id>", "<mountPoint>") #mountPoint such as '/lakehouse/default'
+# Mount external lakehouse  "SalesLakehouse" into specified local path.
+# Note: NotebookUtils is only supported on runtime v1.2 and above. If you are using runtime v1.1, please use mssparkutils instead.
+notebookutils.fs.mount("abfss://DeptSales@onelake.dfs.fabric.microsoft.com/SalesLakehouse.Lakehouse", "/lakehouse/SalesLakehouse")
+import pandas as pd
+# Load data into pandas DataFrame from notebookutils.fs.getMountPath('/lakehouse/SalesLakehouse/Files/Development/DemoSales/Emp.csv')
+df = pd.read_csv(notebookutils.fs.getMountPath('/lakehouse/SalesLakehouse/Files/Development/DemoSales/Emp.csv'))
+display(df)
 
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+mssparkutils.fs.unmount("/MainLakeHouse")
 
 # METADATA ********************
 

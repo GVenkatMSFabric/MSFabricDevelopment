@@ -1,11 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Warehouse",
-    "displayName": "FinalDataWarehouse"
+    "type": "Notebook",
+    "displayName": "Notebook 7",
+    "description": "New notebook"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "8e86e01d-50fb-4c98-997b-46844561c58d"
+    "logicalId": "8b1c315f-e9db-4acb-99e5-560991f8f0c2"
   }
 }
