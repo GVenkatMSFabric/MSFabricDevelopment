@@ -1,0 +1,14 @@
+{
+  "executableFile": "createTablefromParquet_Test.py",
+  "defaultLakehouseArtifactId": "5b9f77a2-8b6d-4400-a5a7-1f9f8bcdac66",
+  "mainClass": "",
+  "additionalLakehouseIds": [],
+  "retryPolicy": null,
+  "commandLineArguments": "",
+  "additionalLibraryUris": [
+    "MainTransofmrations_Test.py",
+    "SmallTransformation_Test.py"
+  ],
+  "language": "Python",
+  "environmentArtifactId": null
+}

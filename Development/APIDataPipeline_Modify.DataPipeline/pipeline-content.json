@@ -1,5 +1,22 @@
 {
   "properties": {
-    "activities": []
+    "activities": [
+      {
+        "type": "FabricSparkJobDefinition",
+        "typeProperties": {
+          "sparkJobDefinitionId": "9e068e96-9bd9-4daf-b733-8e715c0c7bee",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Demo SJD",
+        "dependsOn": []
+      }
+    ]
   }
 }
