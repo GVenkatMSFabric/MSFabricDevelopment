@@ -4,7 +4,7 @@
       {
         "type": "FabricSparkJobDefinition",
         "typeProperties": {
-          "sparkJobDefinitionId": "9e068e96-9bd9-4daf-b733-8e715c0c7bee",
+          "sparkJobDefinitionId": "f1922b21-84d0-4f3e-a216-3b560b6aeb83",
           "workspaceId": "00000000-0000-0000-0000-000000000000"
         },
         "policy": {
@@ -14,7 +14,7 @@
           "secureInput": false,
           "secureOutput": false
         },
-        "name": "Demo SJD",
+        "name": "Get Temp Data",
         "dependsOn": []
       }
     ]

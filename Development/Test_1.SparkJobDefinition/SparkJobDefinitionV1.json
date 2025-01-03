@@ -1,0 +1,11 @@
+{
+  "executableFile": "CommandLineArgements_Test.py",
+  "defaultLakehouseArtifactId": "5b9f77a2-8b6d-4400-a5a7-1f9f8bcdac66",
+  "mainClass": "",
+  "additionalLakehouseIds": [],
+  "retryPolicy": null,
+  "commandLineArguments": "Files/ExtractExceltoCSV/Employee_Employee.csv SparkTableData",
+  "additionalLibraryUris": [],
+  "language": "Python",
+  "environmentArtifactId": null
+}
